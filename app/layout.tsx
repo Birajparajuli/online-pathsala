@@ -1,7 +1,7 @@
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
@@ -17,15 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <html lang="en">
+      <SessionProvider>
         <body className={inter.className}>
           <ConfettiProvider />
           <ToastProvider />
-
           {children}
         </body>
-      </html>
-    </ClerkProvider>
+      </SessionProvider>
+    </html>
   );
 }

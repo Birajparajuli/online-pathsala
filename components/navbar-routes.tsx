@@ -2,10 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { isTeacher } from "@/lib/teacher";
-import { UserButton, useAuth } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
+// import { UserButton, useAuth } from "@clerk/nextjs";
+
 import { ArrowLeft, LogIn, LogOut, MoveRight, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ProfileDropdown from "./profile-dropdown";
 import SearchInput from "./search-input";
 
 const NavbarRoutes = () => {
@@ -14,7 +17,9 @@ const NavbarRoutes = () => {
   const isCoursePage = pathname?.includes("/courses");
 
   const isSearchPage = pathname === "/search";
-  const { userId } = useAuth();
+  const session = useSession();
+  // const { userId } = useAuth();
+  const userId = "123";
   return (
     <>
       {isSearchPage && (
@@ -63,8 +68,8 @@ const NavbarRoutes = () => {
             </Link>
           </>
         )}
-        {/* this help when we logout it will not redirect to clerk site */}
-        <UserButton afterSignOutUrl="/" />
+
+        <ProfileDropdown />
       </div>
     </>
   );

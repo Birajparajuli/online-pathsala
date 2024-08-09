@@ -1,6 +1,6 @@
 import StarRatingValue from "@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/star-rating-value";
+import { auth } from "@/auth";
 import { formatPrice } from "@/lib/format";
-import { auth, clerkClient } from "@clerk/nextjs";
 import { BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,10 +31,8 @@ const CourseCardDashboard = async ({
   progress,
   category,
 }: CourseCardProps) => {
-  const user = await clerkClient.users.getUser(userId);
-  // let userIdAuth = "user_2c7WDRhRgaTXgF3G3JIaInZbQD4";
+  const session = await auth();
 
-  const { userId: userIdAuth } = auth();
   return (
     <Link href={`/courses/${id}`}>
       <div className="group hover:shadow-sm transition overflow-hidden border rounded-md p-3 h-full relative">
@@ -45,7 +43,7 @@ const CourseCardDashboard = async ({
           <div className="text-lg md:text-base font-medium group-hover:text-purple-700 transition line-clamp-2">
             {title}
           </div>
-          <p className="text-sm mb-4"> Created by {user.firstName}</p>
+          <p className="text-sm mb-4"> Created by {session?.user?.name}</p>
           <p className="text-xs to-muted-foreground">{category}</p>
           <div className="pt-3 text-sm text-purple-950  font-black flex justify-start items-center gap-x-3 content-center">
             {totalReview}
@@ -71,7 +69,7 @@ const CourseCardDashboard = async ({
             <p className="text-sm text-gray-500 line-clamp-3">{description}</p>
             <div className="flex items-center gap-2 py-3">
               <div className="pt-4 flex flex-col md:flex-row items-center justify-between">
-                {userIdAuth ? (
+                {session ? (
                   <Link href={`/courses/${id}`}>
                     <Button>Go to course</Button>
                   </Link>

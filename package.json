@@ -4,7 +4,7 @@
 	"private": true,
 	"author": "Aashish Timalsina, Biraj Parajuli",
 	"scripts": {
-		"dev": "next dev --turbo",
+		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -14,13 +14,16 @@
 		"seed": "node scripts/seed.ts"
 	},
 	"dependencies": {
-		"@clerk/nextjs": "^4.23.5",
+		"@auth/prisma-adapter": "^2.4.2",
 		"@hello-pangea/dnd": "^16.3.0",
 		"@hookform/resolvers": "^3.3.1",
 		"@mux/mux-node": "^7.3.1",
 		"@mux/mux-player-react": "^1.14.2",
-		"@prisma/client": "^5.3.0",
+		"@neondatabase/serverless": "^0.9.4",
+		"@prisma/adapter-neon": "^5.18.0",
+		"@prisma/client": "^5.18.0",
 		"@radix-ui/react-alert-dialog": "^1.0.4",
+		"@radix-ui/react-avatar": "^1.1.0",
 		"@radix-ui/react-checkbox": "^1.0.4",
 		"@radix-ui/react-dialog": "^1.0.4",
 		"@radix-ui/react-dropdown-menu": "^2.0.5",
@@ -45,6 +48,7 @@
 		"eslint-config-next": "^14.2.5",
 		"lucide-react": "^0.276.0",
 		"next": "^14.2.5",
+		"next-auth": "^5.0.0-beta.20",
 		"postcss": "8.4.29",
 		"query-string": "^8.1.0",
 		"react": "^18.3.1",
@@ -65,10 +69,13 @@
 		"typescript": "5.2.2",
 		"uploadthing": "^5.5.3",
 		"uuid": "^10.0.0",
+		"ws": "^8.18.0",
 		"zod": "^3.22.2",
 		"zustand": "^4.4.1"
 	},
 	"devDependencies": {
-		"prisma": "^5.3.0"
+		"@types/ws": "^8.5.12",
+		"bufferutil": "^4.0.8",
+		"prisma": "^5.18.0"
 	}
 }

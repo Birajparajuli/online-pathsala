@@ -55,7 +55,7 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
       esewaCall(formData);
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong | Payment");
     } finally {
       setIsLoading(false);
     }

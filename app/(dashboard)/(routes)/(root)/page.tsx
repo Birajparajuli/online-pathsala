@@ -1,5 +1,5 @@
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
-import { auth } from "@clerk/nextjs";
+// import { auth } from "@clerk/nextjs";
 import InfoCard from "./_components/iInfo-card";
 
 import { getCoursesDashboard } from "@/actions/get-courses-dashboard";
@@ -16,8 +16,8 @@ interface SearchPageProps {
   };
 }
 const Dashboard = async ({ searchParams }: SearchPageProps) => {
-  const { userId } = auth();
-  // let userId = "user_2c7WDRhRgaTXgF3G3JIaInZbQD4";
+  // const { userId } = auth();
+  let userId = "user_2c7WDRhRgaTXgF3G3JIaInZbQD4";
   // const user = await currentUser();
   console.log("searchParams =>", searchParams.categoryId);
 

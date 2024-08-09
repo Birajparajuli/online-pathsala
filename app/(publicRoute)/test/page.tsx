@@ -1,5 +1,5 @@
 const TestPage = () => {
-	return <div>Un Protected Page</div>;
+  return <div>Un Protected Page</div>;
 };
 
 export default TestPage;
