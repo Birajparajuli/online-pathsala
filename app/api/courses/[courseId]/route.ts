@@ -1,5 +1,5 @@
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import Mux from "@mux/mux-node";
 import { NextResponse } from "next/server";
 
@@ -13,10 +13,10 @@ export async function DELETE(
 	{ params }: { params: { courseId: string } }
 ) {
 	try {
-		let { userId } = auth();
-
+		const session = await auth()
+		const userId = session?.user?.id;
 		// console.log(values);
-		if (!userId) {
+		if (!userId || session.user.role !== "TEACHER") {
 			return new NextResponse("Unauthorized ", { status: 401 });
 		}
 		const course = await db.course.findUnique({
@@ -60,14 +60,13 @@ export async function PATCH(
 	{ params }: { params: { courseId: string } }
 ) {
 	try {
-		let { userId } = auth();
-		console.log(userId);
+		const session = await auth()
+		const userId = session?.user?.id;
 		const { courseId } = params;
 		const values = await req.json();
-		console.log(courseId);
-		console.log("[COURSE_ID]", courseId);
+		// console.log(courseId);
+		// console.log("[COURSE_ID]", courseId);
 
-		// console.log(values);
 		if (!userId) {
 			return new NextResponse("Unauthorized ", { status: 401 });
 		}

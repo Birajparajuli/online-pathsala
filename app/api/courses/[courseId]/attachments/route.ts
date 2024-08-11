@@ -1,5 +1,5 @@
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export async function POST(
@@ -7,7 +7,8 @@ export async function POST(
 	{ params }: { params: { courseId: string } }
 ) {
 	try {
-		let { userId } = auth();
+		const session = await auth()
+		const userId = session?.user?.id;
 		// console.log(userId);
 
 		const { url } = await req.json();

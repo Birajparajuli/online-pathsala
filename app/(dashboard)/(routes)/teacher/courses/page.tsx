@@ -5,15 +5,14 @@ import { redirect } from "next/navigation";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 export const metadata: Metadata = {
-  title: "LMS | Course list",
-  description: "Leaning Management System |LMS",
+  title: "Pathsala | Course list",
 };
 const CoursesPage = async () => {
   const session = await auth();
   console.log(session);
   console.log(session?.user.role);
   const userId = session?.user.id;
-  if (session?.user.role !== "TEACHER" || session?.user.role !== "ADMIN") {
+  if (session?.user.role !== "TEACHER") {
     return redirect("/dashboard");
   }
   const course = await db.course.findMany({

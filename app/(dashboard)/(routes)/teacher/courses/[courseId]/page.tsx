@@ -1,7 +1,7 @@
+import { auth } from "@/auth";
 import { Banner } from "@/components/banner";
 import { IconBadge } from "@/components/icon-badge";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import {
   ArrowLeft,
   CircleDollarSign,
@@ -22,12 +22,13 @@ import TitleForm from "./_components/title-form";
 
 // courseId must be the same as [courseId]
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
-  let { userId } = auth();
+  const session = await auth();
+  const userId = session?.user?.id;
 
   // console.log(userId);
 
-  if (!userId) {
-    return redirect("/");
+  if (!userId || session.user.role !== "TEACHER") {
+    return redirect("/dashboard");
   }
   const course = await db.course.findUnique({
     where: {
