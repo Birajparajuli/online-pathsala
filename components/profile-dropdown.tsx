@@ -29,9 +29,9 @@ const ProfileDropdown = () => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {session.data?.user.role === "ADMIN" && (
-            <Link href="/dashboard">
+            <Link href="/admin">
               <DropdownMenuItem className=" cursor-pointer">
-                Dashboard
+                Admin
               </DropdownMenuItem>
             </Link>
           )}
