@@ -1,13 +1,14 @@
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
-// import { auth } from "@clerk/nextjs";
 import InfoCard from "./_components/iInfo-card";
 
 import { getCoursesDashboard } from "@/actions/get-courses-dashboard";
+import { auth } from "@/auth";
 import CoursesListDashboard from "@/components/courses-list-dashboard";
 import SearchInput from "@/components/search-input";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/db";
 import { CheckCircle, Clock } from "lucide-react";
+import { redirect } from "next/navigation";
 import Categories from "../search/_components/categories";
 interface SearchPageProps {
   searchParams: {
@@ -16,9 +17,13 @@ interface SearchPageProps {
   };
 }
 const Dashboard = async ({ searchParams }: SearchPageProps) => {
-  // const { userId } = auth();
-  let userId = "user_2c7WDRhRgaTXgF3G3JIaInZbQD4";
-  // const user = await currentUser();
+  const session = await auth();
+
+  if (!session) {
+    redirect("/sign-in?callbackUrl=/dashboard");
+  }
+  let userId = session?.user?.id;
+
   console.log("searchParams =>", searchParams.categoryId);
 
   const categories = await db.category.findMany({

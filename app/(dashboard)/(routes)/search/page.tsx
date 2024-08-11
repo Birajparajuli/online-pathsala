@@ -13,7 +13,8 @@ interface SearchPageProps {
   };
 }
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-  let { userId } = auth();
+  const session = await auth();
+  let userId = session?.user?.id;
   // let userId = "user_2c7WDRhRgaTXgF3G3JIaInZbQD4";
 
   if (!userId) {

@@ -13,14 +13,14 @@ import Link from "next/link";
 
 const ProfileDropdown = () => {
   const session = useSession();
-  // console.log(session);
+  console.log(session);
   return (
     <div className="flex items-center">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Avatar className="h-9 w-9 rounded-md">
+          <Avatar className="h-9 w-9 rounded-full">
             <AvatarImage src={session.data?.user.image || ""} />
-            <AvatarFallback className=" uppercase font-bold h-9 w-9 rounded-md bg-white">
+            <AvatarFallback className=" uppercase font-bold h-9 w-9 rounded-full bg-white">
               {session.data?.user.name?.substring(0, 2)}
             </AvatarFallback>
           </Avatar>
@@ -28,7 +28,7 @@ const ProfileDropdown = () => {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {session.data?.user.role === "admin" && (
+          {session.data?.user.role === "ADMIN" && (
             <Link href="/dashboard">
               <DropdownMenuItem className=" cursor-pointer">
                 Dashboard

@@ -1,32 +1,34 @@
-import { DataTable } from "./_components/data-table";
-import { columns } from "./_components/columns";
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { columns } from "./_components/columns";
+import { DataTable } from "./_components/data-table";
 export const metadata: Metadata = {
-	title: "LMS | Course list",
-	description: "Leaning Management System |LMS",
+  title: "LMS | Course list",
+  description: "Leaning Management System |LMS",
 };
 const CoursesPage = async () => {
-	let { userId } = auth();
-
-	if (!userId) {
-		return redirect("/");
-	}
-	const course = await db.course.findMany({
-		where: {
-			userId,
-		},
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
-	return (
-		<div className="p-6">
-			<DataTable columns={columns} data={course} />
-		</div>
-	);
+  const session = await auth();
+  console.log(session);
+  console.log(session?.user.role);
+  const userId = session?.user.id;
+  if (session?.user.role !== "TEACHER" || session?.user.role !== "ADMIN") {
+    return redirect("/dashboard");
+  }
+  const course = await db.course.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return (
+    <div className="p-6">
+      <DataTable columns={columns} data={course} />
+    </div>
+  );
 };
 
 export default CoursesPage;
