@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { ArrowLeft, LogIn, LogOut, MoveRight, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 import ProfileDropdown from "./profile-dropdown";
 import SearchInput from "./search-input";
 
@@ -22,7 +23,9 @@ const NavbarRoutes = () => {
     <>
       {isSearchPage && (
         <div className="hidden md:block">
-          <SearchInput />
+          <Suspense>
+            <SearchInput />
+          </Suspense>
         </div>
       )}
       <div className="flex gap-x-2 ml-auto">
