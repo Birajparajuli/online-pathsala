@@ -54,3 +54,45 @@ export const getAnalytics = async (userId: string) => {
 		};
 	}
 };
+
+
+export const getAdminAnalytics = async () => {
+	try {
+		const purchase = await db.purchase.findMany({
+			include: {
+				course: true,
+			},
+		});
+		const groupedEarnings = groupByCourse(purchase);
+		const data = Object.entries(groupedEarnings).map(
+			([courseTitle, total]) => ({
+				name: courseTitle,
+				total: total,
+			})
+		);
+
+		const totalRevenue = data.reduce((acc, curr) => acc + curr.total, 0);
+		const totalSale = purchase.length;
+		const totalUsers = await db.user.count();
+		const totalCourses = await db.course.count();
+		const totalActiveCourse = await db.course.count({where: {isPublished: true}});
+		return {
+			data,
+			totalRevenue,
+			totalSale,
+			totalUsers,
+			totalCourses,
+			totalActiveCourse
+		};
+	} catch (error) {
+		console.log("[GET_ANALYTICS]", error);
+		return {
+			data: [],
+			totalRevenue: 0,
+			totalSale: 0,
+			totalUsers: 0,
+			totalCourses: 0,
+			totalActiveCourse: 0
+		};
+	}
+};
