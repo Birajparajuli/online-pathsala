@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 import PaymentConfirmationCard from "./_components/payment-confirmation-card";
 const PaymentSuccess = async () => {
   return (
@@ -9,7 +10,9 @@ const PaymentSuccess = async () => {
         <CheckCircle size={60} className="my-2 text-green-500 " />
         <h2 className="text-2xl font-bold">Payment Successful!</h2>
         <p className="mt-4">Thank you for your payment.</p>
-        <PaymentConfirmationCard />
+        <Suspense fallback="Loading....">
+          <PaymentConfirmationCard />
+        </Suspense>
 
         <div className="my-6 flex gap-4">
           <Button>
