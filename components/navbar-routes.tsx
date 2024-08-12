@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { isTeacher } from "@/lib/teacher";
 import { useSession } from "next-auth/react";
 // import { UserButton, useAuth } from "@clerk/nextjs";
 
@@ -45,10 +44,10 @@ const NavbarRoutes = () => {
               Exit
             </Button>
           </Link>
-        ) : isTeacher(userId) ? (
+        ) : session.data?.user.role === "TEACHER" ? (
           <Link href="/teacher/courses">
-            <Button size="sm" variant="ghost">
-              <MoveRight className="text-red-800" /> Teacher mode
+            <Button size="sm" variant="secondary">
+              Teacher Mode <MoveRight className="text-gray-800 pl-2" />
             </Button>
           </Link>
         ) : null}

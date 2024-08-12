@@ -37,7 +37,7 @@ const adminRoutes = [
   {
     icon: Layout,
     label: "Dashboard",
-    href: "/admin",
+    href: "/admin/home",
   },
   {
     icon: User2,

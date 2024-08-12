@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 const CoursesPage = async () => {
   const session = await auth();
-  console.log(session);
-  console.log(session?.user.role);
+  // console.log(session);
+  // console.log(session?.user.role);
   const userId = session?.user.id;
   if (session?.user.role !== "TEACHER") {
     return redirect("/dashboard");
