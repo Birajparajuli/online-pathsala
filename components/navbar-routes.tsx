@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
-// import { UserButton, useAuth } from "@clerk/nextjs";
 
 import { ArrowLeft, LogIn, LogOut, MoveRight, User } from "lucide-react";
 import Link from "next/link";

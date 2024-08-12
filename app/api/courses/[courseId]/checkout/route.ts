@@ -1,19 +1,20 @@
-import { currentUser } from "@clerk/nextjs";
+
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
-
 export async function POST(
 	req: Request,
 	{ params }: { params: { courseId: string } }
 ) {
 	try {
-		const user = await currentUser();
+		const userSession = await auth()
+		const user = userSession?.user;
 
 		console.log("[USER_FROM_CURRENT_USER]", user);
-		if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+		if (!user || !user.id) {
 			return new NextResponse("Unauthorized No User Found", { status: 401 });
 		}
 
