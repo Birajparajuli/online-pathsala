@@ -18,7 +18,9 @@ export const getChapter = async ({
 				userId_courseId: {
 					userId,
 					courseId: courseId,
+					
 				},
+				paymentStatus: "COMPLETE",
 			},
 		});
 		const course = await db.course.findUnique({

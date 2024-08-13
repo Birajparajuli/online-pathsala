@@ -39,9 +39,8 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -178,43 +177,31 @@ model UserProgress {
 // Purchase has a unique constraint on the combination of userId and courseId, ensuring a user can purchase a course only once.
 
 model Purchase {
-  id     String @id @default(uuid())
-  userId String
-
-  courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+  id            String   @id @default(uuid())
+  userId        String
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt()
+  paymentMethod String?
+  paymentStatus String?
+  paymentId     String?  @unique
+  totalAmount   Float?
 
   @@unique([userId, courseId])
   @@index([courseId])
 }
 
 model CourseRatting {
-  id     String  @id @default(uuid())
-  rating Float?
-  review String? @db.Text
-  userId String
-
-  courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(uuid())
+  rating    Float?
+  review    String?  @db.Text
+  userId    String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 
   @@unique([userId, courseId])
   @@index([courseId])
-}
-
-// StripeCustomer represents a separate entity for handling Stripe-related data.
-// StripeCustomer has a one-to-one relationship with User (one Stripe customer corresponds to one user). 
-
-model StripeCustomer {
-  id               String @id @default(uuid())
-  userId           String @unique
-  stripeCustomerId String @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

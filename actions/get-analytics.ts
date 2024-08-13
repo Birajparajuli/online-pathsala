@@ -59,6 +59,9 @@ export const getAnalytics = async (userId: string) => {
 export const getAdminAnalytics = async () => {
 	try {
 		const purchase = await db.purchase.findMany({
+			where:{
+				paymentStatus:'COMPLETE'
+			},
 			include: {
 				course: true,
 			},

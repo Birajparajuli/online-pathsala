@@ -1,6 +1,7 @@
 "use client";
 import {
   BarChart,
+  BookCopy,
   Layout,
   List,
   ListIcon,
@@ -52,6 +53,11 @@ const adminRoutes = [
     icon: User2,
     label: "All Users",
     href: "/admin/users",
+  },
+  {
+    icon: BookCopy,
+    label: "All Courses",
+    href: "/admin/courses",
   },
 ];
 

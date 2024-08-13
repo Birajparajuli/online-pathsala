@@ -19,6 +19,28 @@ const PaymentConfirmationCard = () => {
     toast.error("Invalid payment data format");
   }
 
+  const createOrder = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost:3000/api/payment/esewa/purchase",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            decodedData,
+          }),
+        }
+      );
+      if (!res.ok) {
+        toast.success("Order created successfully");
+      }
+    } catch (error) {
+      toast.error("Invalid payment data format");
+    }
+  };
+  createOrder();
   return (
     <div className="bg-white p-2 mt-6 rounded-md">
       <p>

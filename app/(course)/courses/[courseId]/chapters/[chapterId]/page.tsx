@@ -80,7 +80,7 @@ const ChapterIdPage = async ({
         />
       )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
-        <div className="p-4">
+        <div className="p-4 ">
           <VideoPlayer
             chapterId={params.chapterId}
             title={chapter.title}
@@ -131,52 +131,53 @@ const ChapterIdPage = async ({
             </>
           )}
         </div>
-
-        <div className="p-4 text-2xl text-purple-950  font-black">
-          ⭐ {course.totalRating} course rating
-          {/* 2K ratings */}
-        </div>
-        <div>
-          <Separator />
-          {purchase && (
-            <div className="p-4">
-              <CourseCommentWithStartForm
-                initialData={reviewCourse!}
-                userId={userId}
-                courseId={params.courseId}
-                reviewId={reviewCourse?.id!}
-              />
-            </div>
-          )}
-
-          {!!courseRatting.length && (
-            <>
-              <div className="grid grid-cols-2 gap-4">
-                {courseRatting.map((rating) => {
-                  if (rating.userId !== userId) {
-                    return (
-                      <>
-                        <div className="flex flex-wrap items-center justify-center gap-5 cursor-pointer">
-                          <UserProfileReview
-                            review={rating.review!}
-                            reviewValue={rating.rating!}
-                            createdAt={rating.createdAt}
-                          />
-                        </div>
-                      </>
-                    );
-                  }
-                })}
+        <div className="bg-gray-50 p-2 rounded-md">
+          <div className="p-4 text-2xl text-purple-950  font-bold">
+            ⭐ {course.totalRating} course rating
+            {/* 2K ratings */}
+          </div>
+          <div>
+            <Separator />
+            {purchase && (
+              <div className="p-4">
+                <CourseCommentWithStartForm
+                  initialData={reviewCourse!}
+                  userId={userId}
+                  courseId={params.courseId}
+                  reviewId={reviewCourse?.id!}
+                />
               </div>
-            </>
-          )}
-        </div>
-        <div className="p-4">
-          {courseRatting.length == 0 && (
-            <div className="font-medium flex items-center justify-between">
-              No review yet
-            </div>
-          )}
+            )}
+
+            {!!courseRatting.length && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  {courseRatting.map((rating) => {
+                    if (rating.userId !== userId) {
+                      return (
+                        <>
+                          <div className="flex flex-wrap items-center justify-center gap-5 cursor-pointer">
+                            <UserProfileReview
+                              review={rating.review!}
+                              reviewValue={rating.rating!}
+                              createdAt={rating.createdAt}
+                            />
+                          </div>
+                        </>
+                      );
+                    }
+                  })}
+                </div>
+              </>
+            )}
+          </div>
+          <div className="p-4">
+            {courseRatting.length == 0 && (
+              <div className="font-medium flex items-center justify-between">
+                No review yet
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

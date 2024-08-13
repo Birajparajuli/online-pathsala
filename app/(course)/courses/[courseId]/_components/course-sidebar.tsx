@@ -29,6 +29,7 @@ const CourseSideBar = async ({ course, progressCount }: CourseSidebarProps) => {
         userId,
         courseId: course.id,
       },
+      paymentStatus: "COMPLETE",
     },
   });
 

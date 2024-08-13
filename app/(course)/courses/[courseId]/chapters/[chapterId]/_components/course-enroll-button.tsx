@@ -1,26 +1,28 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 interface CourseEnrollButtonProps {
   price: number;
   courseId: string;
 }
 const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  // const { userId } = auth();
-  // const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const session = useSession();
+  const userId = session.data?.user.id;
 
-  // if (!userId) {
-  // 	toast.error("Please Login first");
-  // 	return redirect("/sign-up");
-  // }
+  if (!userId) {
+    toast.error("Please Login first");
+    return redirect("/sign-in");
+  }
   const onClick = async () => {
     try {
       setIsLoading(true);
-      //   const response = await axios.post(`/api/courses/${courseId}/checkout`);
+      const response = await axios.post(`/api/courses/${courseId}/checkout`);
       //   window.location.assign(response.data.url);
 
       // Esewa
@@ -38,6 +40,21 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
       if (!res.ok) {
         console.log("Error sending payment request");
       }
+
+      const createOrder = await fetch(
+        "http://localhost:3000/api/payment/esewa/purchase",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            courseId,
+            userId,
+            transaction_uuid: data.transaction_uuid,
+          }),
+        }
+      );
       const formData = {
         amount: price,
         failure_url: "http://localhost:3000/payment-failure",
@@ -62,7 +79,6 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
 
   const esewaCall = (formData: any) => {
     var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
-
     var form = document.createElement("form");
     form.setAttribute("method", "POST");
     form.setAttribute("action", path);

@@ -134,6 +134,10 @@ CREATE TABLE "Purchase" (
     "courseId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "paymentMethod" TEXT,
+    "paymentStatus" TEXT,
+    "paymentId" TEXT,
+    "totalAmount" DOUBLE PRECISION,
 
     CONSTRAINT "Purchase_pkey" PRIMARY KEY ("id")
 );
@@ -149,17 +153,6 @@ CREATE TABLE "CourseRatting" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "CourseRatting_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "StripeCustomer" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "stripeCustomerId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "StripeCustomer_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -200,12 +193,6 @@ CREATE INDEX "CourseRatting_courseId_idx" ON "CourseRatting"("courseId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "CourseRatting_userId_courseId_key" ON "CourseRatting"("userId", "courseId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "StripeCustomer_userId_key" ON "StripeCustomer"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "StripeCustomer_stripeCustomerId_key" ON "StripeCustomer"("stripeCustomerId");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
