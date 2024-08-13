@@ -57,12 +57,12 @@ const Dashboard = async ({ searchParams }: SearchPageProps) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <InfoCard
                 icon={Clock}
-                label="In Progress"
+                label="Course In Progress"
                 numberOfItems={coursesInProgress.length}
               />
               <InfoCard
                 icon={CheckCircle}
-                label="Completed"
+                label="Course Completed"
                 numberOfItems={completedCourses.length}
                 variant="success"
               />
@@ -71,15 +71,15 @@ const Dashboard = async ({ searchParams }: SearchPageProps) => {
           </div>
         </div>
       )}
-      <div className="px-6 space-x-4">
-        <div className="p-6 md:mb-0 block">
+      <div className="px-6">
+        <div className=" md:mb-0 block">
           <SearchInput />
         </div>
-        <div className="space-y-7 p-6">
+        <div className=" pt-4">
           <Categories items={categories} />
         </div>
         <Separator />
-        <div className="space-y-7 p-6">
+        <div className="space-y-7 pt-4">
           <CoursesListDashboard items={courses} />
         </div>
       </div>

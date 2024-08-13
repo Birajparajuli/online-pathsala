@@ -21,17 +21,13 @@ const HomeHero = () => {
 
           <p className="mt-4 sm:text-lg/relaxed">
             Empowering Students and Teachers with a Diverse Range of Interactive
-            and Expert-Led Online Courses Designed to Foster a Passion for
-            Learning and Teaching Excellence
+            Online Courses Designed to Foster a Passion for Learning and
+            Teaching Excellence
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/dashboard">
               <Button>Learn New Topic</Button>
-            </Link>
-
-            <Link href="/become-teacher">
-              <Button variant="secondary">Become a Tutor</Button>
             </Link>
           </div>
         </div>

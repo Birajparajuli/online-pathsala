@@ -8,7 +8,9 @@ export { auth as middleware } from "@/auth";
 //   publicRoutes: ["/api/webhook", "/api/uploadthing" ]
 // });
  
-// export const config = {
-//   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-// };
+export const config = {
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  
+};
  
+

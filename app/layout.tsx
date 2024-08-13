@@ -1,11 +1,11 @@
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
+import "@uploadthing/react/styles.css";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Pathsala",
   description: "Buy courses online",
