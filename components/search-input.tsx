@@ -25,7 +25,7 @@ const SearchInput = () => {
         url: pathname,
         query: {
           categoryId: currentCategoryId,
-          search: debouncedValue,
+          title: debouncedValue,
         },
       },
       { skipEmptyString: true, skipNull: true }

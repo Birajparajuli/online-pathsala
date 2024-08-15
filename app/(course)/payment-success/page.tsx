@@ -16,7 +16,7 @@ const PaymentSuccess = async () => {
 
         <div className="my-6 flex gap-4">
           <Button>
-            <Link href="/courses">Go to Course</Link>
+            <Link href="/dashboard">Go to Course</Link>
           </Button>
         </div>
       </div>

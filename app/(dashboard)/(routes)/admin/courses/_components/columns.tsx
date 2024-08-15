@@ -66,7 +66,7 @@ export const columns: ColumnDef<Course>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
       return (
-        <Link href={`/courses/${id}`}>
+        <Link href={`/admin/courses/${id}`}>
           <EyeIcon />
         </Link>
       );

@@ -4,12 +4,10 @@ import InfoCard from "./_components/iInfo-card";
 import { getCoursesDashboard } from "@/actions/get-courses-dashboard";
 import { auth } from "@/auth";
 import CoursesListDashboard from "@/components/courses-list-dashboard";
-import SearchInput from "@/components/search-input";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/db";
 import { CheckCircle, Clock } from "lucide-react";
 import { redirect } from "next/navigation";
-import Categories from "../search/_components/categories";
 interface SearchPageProps {
   searchParams: {
     title: string;
@@ -36,6 +34,7 @@ const Dashboard = async ({ searchParams }: SearchPageProps) => {
   });
   console.log(courseTotal);
   const courses = await getCoursesDashboard({
+    userId,
     ...searchParams,
   });
   console.log(courses);
@@ -73,11 +72,9 @@ const Dashboard = async ({ searchParams }: SearchPageProps) => {
       )}
       <div className="px-6">
         <div className=" md:mb-0 block">
-          <SearchInput />
+          <h3 className="text-xl font-bold">Purchased Courses</h3>
         </div>
-        <div className=" pt-4">
-          <Categories items={categories} />
-        </div>
+        <div className=" pt-4">{/* <Categories items={categories} /> */}</div>
         <Separator />
         <div className="space-y-7 pt-4">
           <CoursesListDashboard items={courses} />

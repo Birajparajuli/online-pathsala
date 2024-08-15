@@ -10,13 +10,13 @@ type CourseWithProgressWithCategory = Course & {
 };
 
 type GetCourses = {
-	// userId: string;
+	userId: string;
 	search?: string;
 	categoryId?: string;
 };
 
 export const getCoursesDashboard = async ({
-	// userId,
+	userId,
 	search,
 	categoryId,
 }: GetCourses): Promise<CourseWithProgressWithCategory[]> => {
@@ -69,9 +69,9 @@ export const getCoursesDashboard = async ({
 					},
 				},
 				purchases: {
-					// where: {
-					// 	userId,
-					// },
+					where: {
+						userId,
+					},
 				},
 			},
 			orderBy: {
