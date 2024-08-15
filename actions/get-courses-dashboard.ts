@@ -1,6 +1,5 @@
 import { Category, Course } from "@prisma/client";
 
-import { getProgress } from "@/actions/get-progress";
 import { db } from "@/lib/db";
 import { getProgressDashboard } from "./get-progress-dashboard";
 
@@ -54,7 +53,7 @@ export const getCoursesDashboard = async ({
 					},
 				],
 				isPublished: true,
-
+				approvalStatus: 'APPROVED',
 				categoryId,
 			},
 

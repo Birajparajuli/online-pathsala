@@ -1,17 +1,19 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { Course } from "@prisma/client";
+import { DialogTrigger } from "@radix-ui/react-dialog";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Pencil } from "lucide-react";
+import { EyeIcon, Pencil } from "lucide-react";
+import Link from "next/link";
+import CourseStatusEditForm from "./status-edit-form";
 
 export const columns: ColumnDef<Course>[] = [
   {
@@ -32,37 +34,72 @@ export const columns: ColumnDef<Course>[] = [
     },
   },
   {
-    accessorKey: "isPublished",
-    header: "Status",
+    accessorKey: "approvalStatus",
+    header: "Approval Status",
     cell: ({ row }) => {
-      const isPublished = row.getValue("isPublished") || false;
+      const approvalStatus = row.getValue("approvalStatus") || false;
+      let badgeClass = "bg-slate-500"; // Default class
+
+      switch (approvalStatus) {
+        case "APPROVED":
+          badgeClass = "bg-green-500";
+          break;
+        case "REJECTED":
+          badgeClass = "bg-red-500";
+          break;
+        case "PENDING":
+          badgeClass = "bg-yellow-600";
+          break;
+        default:
+          badgeClass = "bg-slate-500";
+      }
       return (
-        <Badge className={cn("bg-slate-500", isPublished && "bg-purple-700")}>
-          {isPublished ? "Published" : "Draft"}
+        <Badge className={cn(badgeClass)}>
+          {approvalStatus.toString().toUpperCase()}
         </Badge>
       );
     },
   },
   {
-    id: "actions",
+    id: "view",
+    header: "View",
     cell: ({ row }) => {
       const { id } = row.original;
+      return (
+        <Link href={`/courses/${id}`}>
+          <EyeIcon />
+        </Link>
+      );
+    },
+  },
+
+  {
+    id: "actions",
+    header: "Edit",
+    cell: ({ row }) => {
+      const { id, title, approvalStatus, approvalMessages } = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-8" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>
+        <Dialog>
+          <DialogTrigger>
+            <div className="flex gap-2 px-4 py-2 bg-gray-300 rounded-md">
               <Pencil className=" h-4 w-4 mr-2" />
               Edit
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </div>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                Editing <span className="text-primary">{title}</span>
+              </DialogTitle>
+              <CourseStatusEditForm
+                status={approvalStatus}
+                id={id}
+                approvalMessage={approvalMessages || " "}
+              />
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       );
     },
   },

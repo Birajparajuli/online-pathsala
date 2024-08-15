@@ -83,15 +83,22 @@ model Course {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  chapters      Chapter[]
-  attachments   Attachment[]
-  purchases     Purchase[]
-  courseRatting CourseRatting[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  chapters         Chapter[]
+  attachments      Attachment[]
+  purchases        Purchase[]
+  courseRatting    CourseRatting[]
+  approvalStatus   ApprovalStatus  @default(PENDING)
+  approvalMessages String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@index([categoryId])
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 // Category has a one-to-many relationship with Course  
