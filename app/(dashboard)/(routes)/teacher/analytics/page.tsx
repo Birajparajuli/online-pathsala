@@ -1,7 +1,6 @@
 import { getAnalytics } from "@/actions/get-analytics";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { Chart } from "./_components/chart";
 import DataCard from "./_components/data-card";
 
 const Analytics = async () => {
@@ -19,7 +18,7 @@ const Analytics = async () => {
         <DataCard label="Total Revenue" value={totalRevenue} />
       </div>
 
-      <Chart data={data} />
+      {/* <Chart data={data} /> */}
     </div>
   );
 };

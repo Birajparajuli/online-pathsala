@@ -8,10 +8,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Course } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
+import {
+  ArrowUpDown,
+  MessageCircle,
+  MoreHorizontal,
+  Pencil,
+} from "lucide-react";
 import Link from "next/link";
 
 export const columns: ColumnDef<Course>[] = [
@@ -54,24 +64,45 @@ export const columns: ColumnDef<Course>[] = [
     },
   },
   {
-    accessorKey: "isPublished",
-    header: ({ column }) => {
+    accessorKey: "approvalStatus",
+    header: "Approval Status",
+    cell: ({ row }) => {
+      const approvalStatus = row.getValue("approvalStatus") || false;
+      let badgeClass = "bg-slate-500"; // Default class
+
+      switch (approvalStatus) {
+        case "APPROVED":
+          badgeClass = "bg-green-500";
+          break;
+        case "REJECTED":
+          badgeClass = "bg-red-500";
+          break;
+        case "PENDING":
+          badgeClass = "bg-yellow-600";
+          break;
+        default:
+          badgeClass = "bg-slate-500";
+      }
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Published
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <Badge className={cn(badgeClass)}>
+          {approvalStatus.toString().toUpperCase()}
+        </Badge>
       );
     },
+  },
+  {
+    id: "adminMessage",
+    header: "Admin Message",
     cell: ({ row }) => {
-      const isPublished = row.getValue("isPublished") || false;
+      const { id, approvalMessages } = row.original;
+
       return (
-        <Badge className={cn("bg-slate-500", isPublished && "bg-purple-700")}>
-          {isPublished ? "Published" : "Draft"}
-        </Badge>
+        <Popover>
+          <PopoverTrigger>
+            <MessageCircle />
+          </PopoverTrigger>
+          <PopoverContent>{approvalMessages}</PopoverContent>
+        </Popover>
       );
     },
   },
