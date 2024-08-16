@@ -23,7 +23,7 @@ const ChapterIdPage = async ({
   const userId = session?.user?.id;
 
   if (!userId) {
-    return redirect("/");
+    return redirect("/dashboard");
   }
   const reviewCourse = await db.courseRatting.findUnique({
     where: {
@@ -61,7 +61,7 @@ const ChapterIdPage = async ({
   });
 
   if (!chapter || !course) {
-    return redirect("/");
+    return redirect("/dashboard");
   }
   console.log("[courseRatting]", courseRatting);
 
