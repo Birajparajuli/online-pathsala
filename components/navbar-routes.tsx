@@ -17,8 +17,6 @@ const NavbarRoutes = () => {
 
   const isSearchPage = pathname === "/search";
   const session = useSession();
-  // const { userId } = useAuth();
-  const userId = "123";
   return (
     <>
       {isSearchPage && (
@@ -46,14 +44,14 @@ const NavbarRoutes = () => {
               Exit
             </Button>
           </Link>
-        ) : session.data?.user.role === "TEACHER" ? (
+        ) : session.data?.user.role !== "ADMIN" ? (
           <Link href="/teacher/courses">
             <Button size="sm" variant="secondary">
               Teacher Mode <MoveRight className="text-gray-800 pl-2" />
             </Button>
           </Link>
         ) : null}
-        {!userId && (
+        {!session && (
           <>
             <Link href="/sign-in">
               <Button size="sm" variant="ghost">

@@ -15,9 +15,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { db } from "@/lib/db";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const FormSchema = z.object({
@@ -40,6 +42,22 @@ const CourseStatusEditForm = ({
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log("data", data);
+    try {
+      const updateCourse = await db.course.update({
+        where: {
+          id: id,
+        },
+        data: {
+          approvalStatus: data.approval_status,
+          approvalMessages: data.message,
+        },
+      });
+      console.log("updateCourse", updateCourse);
+      toast.success(`Course Status Updated Successfully`);
+    } catch (error) {
+      console.log("error", error);
+      toast.error(`Errror Occoured !! ${error}`);
+    }
   }
   return (
     <Form {...form}>
