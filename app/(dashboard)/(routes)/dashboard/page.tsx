@@ -41,15 +41,8 @@ const Dashboard = async ({ searchParams }: SearchPageProps) => {
   const { completedCourses, coursesInProgress } = await getDashboardCourses(
     userId!
   );
-
-  // const { completedCourses, coursesInProgress } = await getDashboardCourses(
-  // 	user?.id!
-  // );
-
   return (
     <>
-      {/* <DashboardCarousel /> */}
-
       {userId && (
         <div>
           <div className="p-6 space-y-4">

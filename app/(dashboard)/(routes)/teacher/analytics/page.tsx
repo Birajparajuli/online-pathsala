@@ -6,7 +6,7 @@ import DataCard from "./_components/data-card";
 const Analytics = async () => {
   const session = await auth();
   const userId = session?.user.id;
-  if (session?.user.role !== "TEACHER") {
+  if (!session?.user) {
     return redirect("/");
   }
   const { data, totalRevenue, totalSale } = await getAnalytics(userId);

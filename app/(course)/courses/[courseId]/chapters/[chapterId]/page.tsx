@@ -112,6 +112,42 @@ const ChapterIdPage = async ({
           <div>
             <Preview value={chapter.description!} />
           </div>
+          {chapter.chapterQuizLink && (
+            <>
+              <h2 className="text-2xl font-semibold mb-2">Chapter Quiz</h2>
+              <Separator />
+            </>
+          )}
+
+          <div className="my-5 border border-primary rounded-md">
+            {chapter.chapterQuizLink && purchase ? (
+              <iframe
+                src={chapter.chapterQuizLink}
+                width="100%"
+                height="1000px"
+                className="rounded-md"
+              >
+                Loading…
+              </iframe>
+            ) : (
+              <p>Loading form...</p>
+            )}
+          </div>
+          <div className="my-6 flex place-content-end">
+            {purchase ? (
+              <CourseProgressButton
+                chapterId={params.chapterId}
+                courseId={params.courseId}
+                nextChapterId={nextChapter?.id}
+                isCompleted={!!userProgress?.isCompleted}
+              />
+            ) : (
+              <CourseEnrollButton
+                courseId={params.courseId}
+                price={course.price!}
+              />
+            )}
+          </div>
           {!!attachments.length && (
             <>
               <Separator />

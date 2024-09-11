@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('USER', 'TEACHER', 'ADMIN');
 
+-- CreateEnum
+CREATE TYPE "ApprovalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -63,6 +66,8 @@ CREATE TABLE "Course" (
     "totalRating" DOUBLE PRECISION DEFAULT 0,
     "isPublished" BOOLEAN NOT NULL DEFAULT false,
     "categoryId" TEXT,
+    "approvalStatus" "ApprovalStatus" NOT NULL DEFAULT 'PENDING',
+    "approvalMessages" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -181,6 +186,9 @@ CREATE INDEX "UserProgress_chapterId_idx" ON "UserProgress"("chapterId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserProgress_userId_chapterId_key" ON "UserProgress"("userId", "chapterId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Purchase_paymentId_key" ON "Purchase"("paymentId");
 
 -- CreateIndex
 CREATE INDEX "Purchase_courseId_idx" ON "Purchase"("courseId");

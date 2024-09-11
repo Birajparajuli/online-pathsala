@@ -12,7 +12,7 @@ const CoursesPage = async () => {
   // console.log(session);
   // console.log(session?.user.role);
   const userId = session?.user.id;
-  if (session?.user.role !== "TEACHER") {
+  if (!session?.user) {
     return redirect("/dashboard");
   }
   const course = await db.course.findMany({

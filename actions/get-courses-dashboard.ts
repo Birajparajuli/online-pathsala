@@ -21,7 +21,7 @@ export const getCoursesDashboard = async ({
 	categoryId,
 }: GetCourses): Promise<CourseWithProgressWithCategory[]> => {
 	try {
-		console.log("search", search);
+		// console.log("search", search);
 		const courses = await db.course.findMany({
 			/* where: {
 				isPublished: true,
@@ -33,28 +33,15 @@ export const getCoursesDashboard = async ({
 			}, */
 
 			where: {
-				OR: [
-					{
-						description: {
-							contains: search,
-						},
-					},
-					{
-						title: {
-							contains: search,
-						},
-					},
-					{
-						category: {
-							name: {
-								contains: search,
-							},
-						},
-					},
-				],
+				
 				isPublished: true,
 				approvalStatus: 'APPROVED',
-				categoryId,
+				purchases:{
+					some:{
+						id: userId,
+					}
+				}
+				
 			},
 
 			include: {

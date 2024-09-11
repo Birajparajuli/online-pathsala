@@ -78,7 +78,7 @@ export const getAdminAnalytics = async () => {
 		const totalSale = purchase.length;
 		const totalUsers = await db.user.count();
 		const totalCourses = await db.course.count();
-		const totalActiveCourse = await db.course.count({where: {isPublished: true}});
+		const totalActiveCourse = await db.course.count({where: {isPublished: true, approvalStatus:"APPROVED"}});
 		return {
 			data,
 			totalRevenue,

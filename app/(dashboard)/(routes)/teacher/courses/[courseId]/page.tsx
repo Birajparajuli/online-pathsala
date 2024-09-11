@@ -27,7 +27,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   // console.log(userId);
 
-  if (!userId || session.user.role !== "TEACHER") {
+  if (!userId) {
     return redirect("/dashboard");
   }
   const course = await db.course.findUnique({

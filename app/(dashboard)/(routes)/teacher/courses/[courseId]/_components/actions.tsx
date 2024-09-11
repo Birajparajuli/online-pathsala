@@ -49,8 +49,7 @@ const Actions = ({
         toast.success("Course Unpublished");
       } else {
         await axios.patch(`/api/courses/${courseId}/publish`);
-        toast.success("Course Published");
-        confetti.onOpen();
+        toast.success("Course is saved and will be reviewd by Admin");
       }
 
       router.refresh();

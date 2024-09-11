@@ -1,4 +1,5 @@
 import { Category, Course } from "@prisma/client";
+import Link from "next/link";
 import CourseCardDashboard from "./course-card-dashboard";
 
 type CourseWithProgressWithCategory = Course & {
@@ -31,7 +32,10 @@ const CoursesListDashboard = ({ items }: CoursesListProps) => {
       </div>
       {items.length === 0 && (
         <div className="text-center text-sm to-muted-foreground mt-10">
-          No Course Available!!
+          No Course Purchased!! Browse course{" "}
+          <Link href="/search" className="text-primary underline">
+            Here.
+          </Link>
         </div>
       )}
     </div>

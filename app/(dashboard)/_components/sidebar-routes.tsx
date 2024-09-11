@@ -19,7 +19,7 @@ const guestRoutes = [
   },
   {
     icon: Search,
-    label: "Searh",
+    label: "Search",
     href: "/search",
   },
 ];
