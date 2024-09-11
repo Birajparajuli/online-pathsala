@@ -1,7 +1,10 @@
 # Online Pathsala: _A Comprehensive Online Learning Platform_
 
 ![Static Badge](https://img.shields.io/badge/%20-NextJS-white?style=flat-square&logo=nextdotjs&logoColor=black)
-![Static Badge](https://img.shields.io/badge/%20-NextJS-white?style=flat-square&logo=nextdotjs&logoColor=black)
+![Static Badge](https://img.shields.io/badge/%20-Tailwind_CSS-white?style=flat-square&logo=tailwindcss&logoColor=black)
+![Static Badge](https://img.shields.io/badge/%20-shadcnui-white?style=flat-square&logo=shadcnui&logoColor=black)
+![Static Badge](https://img.shields.io/badge/%20-Prisma-white?style=flat-square&logo=prisma&logoColor=black)
+![Static Badge](https://img.shields.io/badge/%20-PostgreSQL-white?style=flat-square&logo=postgresql&logoColor=black)
 
 ![Online Pathsala Banner](https://github.com/Birajparajuli/online-pathsala/blob/main/public/auth-banner.png)
 Online Pathsala is an innovative online video course platform designed to provide learners with engaging and interactive educational experiences. It offers a wide range of video courses, progress tracking, and a secure payment system through eSewa. The platform features a dedicated Teacher Portal, allowing educators to create courses, manage chapters, upload resources, and track analytics. The Admin Portal enables administrators to manage users, teachers, and transactions, ensuring smooth platform operations. Online Pathsala aims to create a seamless learning environment by integrating intuitive features for both students and instructors.
