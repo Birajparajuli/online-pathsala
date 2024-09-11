@@ -2,11 +2,7 @@
 
 ![Online Pathsala Banner](https://github.com/Birajparajuli/online-pathsala/blob/main/public/auth-banner.png)
 Online Pathsala is an innovative online video course platform designed to provide learners with engaging and interactive educational experiences. It offers a wide range of video courses, progress tracking, and a secure payment system through eSewa. The platform features a dedicated Teacher Portal, allowing educators to create courses, manage chapters, upload resources, and track analytics. The Admin Portal enables administrators to manage users, teachers, and transactions, ensuring smooth platform operations. Online Pathsala aims to create a seamless learning environment by integrating intuitive features for both students and instructors.
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`]
 
-## Built With
-
-- [![Next][Next.js]][Next-url]
 
 ## Getting Started
 
